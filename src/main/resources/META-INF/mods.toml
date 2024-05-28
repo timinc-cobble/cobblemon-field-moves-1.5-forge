@@ -27,6 +27,6 @@ side = "BOTH"
 [[dependencies.field_moves]]
 modId = "cobblemon"
 mandatory = true
-versionRange = "[1.5.0,)"
+versionRange = "[1.5.0,1.6.0)"
 ordering = "NONE"
 side = "BOTH"
