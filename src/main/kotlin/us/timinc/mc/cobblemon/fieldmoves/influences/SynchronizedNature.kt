@@ -21,6 +21,7 @@ class SynchronizedNature(val player: ServerPlayer) : SpawningInfluence {
         val roll = nextDouble()
 
         if (roll < config.synchronizeChance) {
+            debug("Setting wild ${action.props.species} to nature $nature")
             action.props.nature = nature
         }
     }
