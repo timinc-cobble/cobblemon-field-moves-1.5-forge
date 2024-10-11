@@ -4,7 +4,7 @@ license = "MIT"
 
 [[mods]]
 modId = "field_moves"
-version = "1.5-forge-1.0.0"
+version = "1.5-forge-1.1.0"
 displayName = "Cobblemon Field Moves"
 description = '''
 Adds the in-world effects of field moves and abilities to Cobblemon.
