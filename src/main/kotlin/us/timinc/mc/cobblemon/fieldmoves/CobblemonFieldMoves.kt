@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber
 import us.timinc.mc.cobblemon.fieldmoves.config.Config
 import us.timinc.mc.cobblemon.fieldmoves.config.ConfigBuilder
+import us.timinc.mc.cobblemon.fieldmoves.influences.CuteCharm
 import us.timinc.mc.cobblemon.fieldmoves.influences.SynchronizedNature
 
 @Mod(CobblemonFieldMoves.MOD_ID)
@@ -59,7 +60,8 @@ object CobblemonFieldMoves {
                     }
                 }
             }
-            PlayerSpawnerFactory.influenceBuilders.add { SynchronizedNature(it) }
+            PlayerSpawnerFactory.influenceBuilders.add(::SynchronizedNature)
+            PlayerSpawnerFactory.influenceBuilders.add(::CuteCharm)
         }
     }
 
