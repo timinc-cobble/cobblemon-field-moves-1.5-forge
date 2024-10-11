@@ -12,6 +12,13 @@ import us.timinc.mc.cobblemon.fieldmoves.CobblemonFieldMoves.debug
 import kotlin.random.Random.Default.nextDouble
 
 class CuteCharm(val player: ServerPlayer) : SpawningInfluence {
+    companion object {
+        val GENDER_BENDER = mapOf(
+            Gender.MALE to Gender.FEMALE,
+            Gender.FEMALE to Gender.MALE
+        )
+    }
+
     override fun affectAction(action: SpawnAction<*>) {
         if (action !is PokemonSpawnAction) return
         if (action.props.gender != null) return
@@ -20,13 +27,19 @@ class CuteCharm(val player: ServerPlayer) : SpawningInfluence {
             debug("Spawning species of $species has a fixed gender, cute charm can't affect")
             return
         }
-        val gender = getCuteCharmGender(player) ?: return
+
         if (nextDouble() >= config.cuteCharmChance) {
             debug("Rolled for cute charm but missed.")
             return
         }
-        debug("Setting wild ${action.props.species} to nature $gender")
-        action.props.gender = gender
+
+        val gender = getCuteCharmGender(player) ?: return
+        val invertedGender = GENDER_BENDER[gender] ?: run {
+            debug("Gender $gender doesn't have an opposite, cute charm has no effect")
+            return
+        }
+        debug("Setting wild ${action.props.species} to nature $invertedGender")
+        action.props.gender = invertedGender
     }
     private fun getCuteCharmGender(player: ServerPlayer): Gender? {
         val playerPartyStore = Cobblemon.storage.getParty(player.uuid)
